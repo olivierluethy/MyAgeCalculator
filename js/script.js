@@ -1,53 +1,44 @@
-function calculate_age(event) {
+function calculate_age() {
+    /* Check if input value is empty */
     if (document.getElementById("birth_date").value != "") {
+        /* Show cancel image to give user possibility to delete all input */
+        document.querySelector("img").style.display = "block";
+
+        /* Do correct format automatically */
         if (document.getElementById("birth_date").value.length == 4) {
-            document.getElementById("birth_date").value += "-";
-        } else if (event.which == 46 || event.which == 8) {
-            document.getElementById("birth_date").value -= "-";
-        } else if (document.getElementById("birth_date").value.length == 7) {
-            document.getElementById("birth_date").value += "-";
+            document.getElementById("birth_date").value += ", ";
+        } else if (document.getElementById("birth_date").value.length == 8) {
+            document.getElementById("birth_date").value += ", ";
         }
-        var birth_date = new Date(document.getElementById("birth_date").value);
-        var birth_date_day = birth_date.getDate();
-        var birth_date_month = birth_date.getMonth()
-        var birth_date_year = birth_date.getFullYear();
 
-        var today_date = new Date();
-        var today_day = today_date.getDate();
-        var today_month = today_date.getMonth();
-        var today_year = today_date.getFullYear();
+        /* Calculate each 500 milliseconds new */
+        setInterval(function() {
+            if (document.getElementById("birth_date").value != "") {
+                let date = document.getElementById("birth_date").value;
 
-        var calculated_age = 0;
-
-        if (today_month > birth_date_month) {
-            calculated_age = today_year - birth_date_year;
-        } else if (today_month == birth_date_month) {
-            if (today_day >= birth_date_day) {
-                calculated_age = today_year - birth_date_year;
+                document.querySelector("h1").innerHTML =
+                    "You are " + Math.trunc((new Date() - new Date(date)) / (1000 * 60 * 60 * 24) / 365) + " years old<br>" +
+                    "You are " + Math.trunc((new Date() - new Date(date)) / (1000 * 60 * 60 * 24) / 7) + " weeks old<br>" +
+                    "You are " + Math.trunc((new Date() - new Date(date)) / (1000 * 60 * 60 * 24)) + " days old<br>" +
+                    "You are " + Math.trunc((new Date() - new Date(date)) / (1000 * 60 * 60 * 24) * 24) + " hours old<br>" +
+                    "You are " + Math.trunc((new Date() - new Date(date)) / (1000 * 60 * 60 * 24) * 1440) + " minutes old<br>" +
+                    "You are " + Math.trunc((new Date() - new Date(date)) / (1000 * 60 * 60 * 24) * 86400) + " seconds old<br>";
             } else {
-                calculated_age = today_year - birth_date_year - 1;
+                document.querySelector("img").style.display = "none";
+                document.querySelector("h1").innerHTML = "Please enter a date!";
             }
-        } else {
-            calculated_age = today_year - birth_date_year - 1;
-        }
-        document.querySelector("h1").innerHTML =
-            "You are " + calculated_age + " years old<br>" +
-            "You are " + Math.trunc((new Date() - new Date(2002, 10, 22)) / (1000 * 60 * 60 * 24) / 7) + " weeks old<br>" +
-            "You are " + Math.trunc((new Date() - new Date(2002, 10, 22)) / (1000 * 60 * 60 * 24)) + " days old<br>" +
-            "You are " + Math.trunc((new Date() - new Date(2002, 10, 22)) / (1000 * 60 * 60 * 24) / 7 * 24) + " hours old<br>" +
-            "You are " + Math.trunc((new Date() - new Date(2002, 10, 22)) / (1000 * 60 * 60 * 24) / 7 * 84) + " minutes old<br>" +
-            "You are " + Math.trunc((new Date() - new Date(2002, 10, 22)) / (1000 * 60 * 60 * 24) / 7 * 144) + " seconds old<br>";
+        }, 500);
+
         // https://stackoverflow.com/questions/13535570/javascript-calculating-age-in-days
         // https://www.youtube.com/watch?v=sJkadt-TJqc
     } else {
+        /* If input value is empty */
+        document.querySelector("img").style.display = "none";
         document.querySelector("h1").innerHTML = "Please enter a date!";
     }
 }
 
-
-
-// var ageCount = document.querySelector('h1');
-
-// setInterval(function() {
-//     ageCount.innerHTML = new Date(2002, 10, 22);
-// }, 500);
+function clearInput() {
+    /* Clear input value */
+    document.getElementById("birth_date").value = "";
+}
