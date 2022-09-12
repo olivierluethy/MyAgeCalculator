@@ -11,26 +11,26 @@ function calculate_age() {
             document.getElementById("birth_date").value += ", ";
         }
 
-        /* Calculate each 500 milliseconds new */
+        /* Calculate each milliseconds new */
         setInterval(function() {
             if (document.getElementById("birth_date").value != "") {
                 let date = document.getElementById("birth_date").value;
 
+                // https://stackoverflow.com/questions/13535570/javascript-calculating-age-in-days
+                // https://www.youtube.com/watch?v=sJkadt-TJqc
                 document.querySelector("h1").innerHTML =
-                    "You are " + Math.trunc((new Date() - new Date(date)) / (1000 * 60 * 60 * 24) / 365) + " years old<br>" +
-                    "You are " + Math.trunc((new Date() - new Date(date)) / (1000 * 60 * 60 * 24) / 7) + " weeks old<br>" +
-                    "You are " + Math.trunc((new Date() - new Date(date)) / (1000 * 60 * 60 * 24)) + " days old<br>" +
-                    "You are " + Math.trunc((new Date() - new Date(date)) / (1000 * 60 * 60 * 24) * 24) + " hours old<br>" +
-                    "You are " + Math.trunc((new Date() - new Date(date)) / (1000 * 60 * 60 * 24) * 1440) + " minutes old<br>" +
-                    "You are " + Math.trunc((new Date() - new Date(date)) / (1000 * 60 * 60 * 24) * 86400) + " seconds old<br>";
+                    "You are " + Math.trunc((new Date() - new Date(date)) / (86400000) / 365) + " years old<br>" +
+                    "You are " + Math.trunc((new Date() - new Date(date)) / (86400000) / 7) + " weeks old<br>" +
+                    "You are " + Math.trunc((new Date() - new Date(date)) / (86400000)) + " days old<br>" +
+                    "You are " + Math.trunc((new Date() - new Date(date)) / (86400000) * 24) + " hours old<br>" +
+                    "You are " + Math.trunc((new Date() - new Date(date)) / (86400000) * 1440) + " minutes old<br>" +
+                    "You are " + Math.trunc((new Date() - new Date(date)) / (86400000) * 86400) + " seconds old<br>" +
+                    "You are " + Math.trunc((new Date() - new Date(date)) / (86400000) * 86400000) + " milliseconds old<br>";
             } else {
                 document.querySelector("img").style.display = "none";
                 document.querySelector("h1").innerHTML = "Please enter a date!";
             }
-        }, 500);
-
-        // https://stackoverflow.com/questions/13535570/javascript-calculating-age-in-days
-        // https://www.youtube.com/watch?v=sJkadt-TJqc
+        }, 1);
     } else {
         /* If input value is empty */
         document.querySelector("img").style.display = "none";
