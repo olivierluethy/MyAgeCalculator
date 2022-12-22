@@ -1,44 +1,46 @@
-function calculate_age() {
-    /* Check if input value is empty */
-    if (document.getElementById("birth_date").value != "") {
-        /* Show cancel image to give user possibility to delete all input */
-        document.querySelector("img").style.display = "block";
+function calculateAge() {
+  // Get reference to input element, cancel image, and result element
+  const input = document.getElementById("birth_date");
+  const cancelImage = document.querySelector("img");
+  const resultElement = document.querySelector("h1");
 
-        /* Do correct format automatically */
-        if (document.getElementById("birth_date").value.length == 4) {
-            document.getElementById("birth_date").value += ", ";
-        } else if (document.getElementById("birth_date").value.length == 8) {
-            document.getElementById("birth_date").value += ", ";
-        }
+  if (input.value) {
+    // Show cancel image if input has a value
+    cancelImage.style.display = "block";
 
-        /* Calculate each milliseconds new */
-        setInterval(function() {
-            if (document.getElementById("birth_date").value != "") {
-                let date = document.getElementById("birth_date").value;
-
-                // https://stackoverflow.com/questions/13535570/javascript-calculating-age-in-days
-                // https://www.youtube.com/watch?v=sJkadt-TJqc
-                document.querySelector("h1").innerHTML =
-                    "You are " + Math.trunc((new Date() - new Date(date)) / (86400000) / 365) + " years old<br>" +
-                    "You are " + Math.trunc((new Date() - new Date(date)) / (86400000) / 7) + " weeks old<br>" +
-                    "You are " + Math.trunc((new Date() - new Date(date)) / (86400000)) + " days old<br>" +
-                    "You are " + Math.trunc((new Date() - new Date(date)) / (86400000) * 24) + " hours old<br>" +
-                    "You are " + Math.trunc((new Date() - new Date(date)) / (86400000) * 1440) + " minutes old<br>" +
-                    "You are " + Math.trunc((new Date() - new Date(date)) / (86400000) * 86400) + " seconds old<br>" +
-                    "You are " + Math.trunc((new Date() - new Date(date)) / (86400000) * 86400000) + " milliseconds old<br>";
-            } else {
-                document.querySelector("img").style.display = "none";
-                document.querySelector("h1").innerHTML = "Please enter a date!";
-            }
-        }, 1);
-    } else {
-        /* If input value is empty */
-        document.querySelector("img").style.display = "none";
-        document.querySelector("h1").innerHTML = "Please enter a date!";
+    // Ensure the date is in the correct format
+    if (input.value.length === 4) {
+      input.value += ", ";
+    } else if (input.value.length === 8) {
+      input.value += ", ";
     }
+
+    setInterval(function() {
+      if (input.value) {
+        // Calculate age in different units
+        const date = input.value;
+        const ageInMilliseconds = new Date() - new Date(date);
+        resultElement.innerHTML = `You are ${Math.trunc(ageInMilliseconds / (86400000) / 365)} years old<br>
+          You are ${Math.trunc(ageInMilliseconds / (86400000) / 7)} weeks old<br>
+          You are ${Math.trunc(ageInMilliseconds / (86400000))} days old<br>
+          You are ${Math.trunc(ageInMilliseconds / (86400000) * 24)} hours old<br>
+          You are ${Math.trunc(ageInMilliseconds / (86400000) * 1440)} minutes old<br>
+          You are ${Math.trunc(ageInMilliseconds / (86400000) * 86400)} seconds old<br>
+          You are ${Math.trunc(ageInMilliseconds / (86400000) * 86400000)} milliseconds old<br>`;
+      } else {
+        // Hide cancel image and show message if input is empty
+        cancelImage.style.display = "none";
+        resultElement.innerHTML = "Please enter a date!";
+      }
+    }, 1);
+  } else {
+    // Hide cancel image and show message if input is empty
+    cancelImage.style.display = "none";
+    resultElement.innerHTML = "Please enter a date!";
+  }
 }
 
 function clearInput() {
-    /* Clear input value */
-    document.getElementById("birth_date").value = "";
+  // Clear the value of the input element
+  document.getElementById("birth_date").value = "";
 }
