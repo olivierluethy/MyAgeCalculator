@@ -1,11 +1,43 @@
-# MyAgeCalculator
-The code calculates the age of a person in different units (years, weeks, days, hours, minutes, seconds, and milliseconds) based on their birth date. It does this by subtracting the birth date from the current date, and then converting the result to the desired unit.
+# My Age Calculator
 
-## How the program works
-The calculateAge function is called when the user inputs a birth date in the input element with the ID "birth_date". If the input element has a value, the code displays a cancel image that allows the user to clear the input.
+A small, responsive **web app that shows your exact age in real time** — in years,
+weeks, days, hours, minutes, seconds and even milliseconds. Type in your birth date
+and the numbers keep ticking up live. Built with plain HTML, Sass and JavaScript.
 
-The code then checks the length of the input value. If the length is 4 or 8, it adds a comma to the end of the value to ensure it is in the correct format.
+## Features
 
-The code then uses a setInterval function to continuously calculate and update the age of the person. If the input element has a value, the age is calculated in different units and displayed in the result element with the tag name "h1". If the input element is empty, the cancel image is hidden and a message is displayed asking the user to enter a date.
+- **Live age** in multiple units: years, weeks, days, hours, minutes, seconds, milliseconds
+- Updates **every moment** via a live timer — watch the milliseconds run
+- **One-tap clear** button for the date input
+- **Responsive** layout (dedicated `responsive.scss`)
+- No frameworks, no build server — just open it
 
-The clearInput function is called when the user clicks on the cancel image. It simply clears the value of the input element.
+## How it works
+
+Enter your birth date in the input field. The app subtracts your birth date from the
+current date and converts the difference into each unit, refreshing continuously so
+the result is always up to date. Clearing the field resets the display.
+
+## Run it
+
+```bash
+git clone https://github.com/olivierluethy/MyAgeCalculator.git
+cd MyAgeCalculator
+```
+
+Open `index.html` in your browser.
+
+## Tech
+
+HTML · **Sass/SCSS** (compiled to `css/style.css` and `css/responsive.css`) · vanilla JavaScript.
+
+To recompile the styles after editing the `.scss` files:
+
+```bash
+sass css/style.scss css/style.css
+sass css/responsive.scss css/responsive.css
+```
+
+## License
+
+Free to use and modify.
